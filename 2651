@@ -25,3 +25,9 @@ source code:
     return s;
 
 }
+
+OUTPUT:
+
+Input: arrivalTime = 13, delayedTime = 11
+Output: 0
+
