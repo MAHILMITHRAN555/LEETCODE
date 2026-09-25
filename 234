@@ -1,0 +1,120 @@
+PALINDROME LINKED LIST:
+
+Given the head of a singly linked list, return true if it is a palindrome or false otherwise.
+
+Example 1:
+
+Input: head = [1,2,2,1]
+Output: true
+Example 2:
+
+
+Input: head = [1,2]
+Output: false
+ 
+
+Constraints:
+
+The number of nodes in the list is in the range [1, 105].
+0 <= Node.val <= 9
+
+SOURCE CODE:
+
+USING ARRAY:
+
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     struct ListNode *next;
+ * };
+ */
+bool isPalindrome(struct ListNode* head) {
+     struct ListNode*next;
+     struct ListNode*temp=head;
+     struct ListNode*current=head;
+     struct ListNode*prev=NULL;
+     int c=0;
+     while(temp!=NULL)
+    { 
+        c++;
+        temp=temp->next;
+      
+    }
+    int a1[c];
+    int a2[c];
+    temp=head;
+    int i=0;
+    while(temp!=NULL)
+    {
+          a1[i]=temp->val;
+          temp=temp->next;
+          i++;
+    }
+     while(current!=NULL)
+     {
+              next=current->next;
+              current->next=prev;
+              prev=current;
+              current=next;
+     }
+     int j=0;
+     while(prev!=NULL)
+     {
+          a2[j]=prev->val;
+          prev=prev->next;
+          j++;
+     }
+   for(int i=0;i<c;i++)
+   { 
+        if(a1[i]!=a2[i])
+        { 
+         return false;
+        }
+   }
+     return true;
+    
+}
+
+WITHOUT ARRAY:
+
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     struct ListNode *next;
+ * };
+ */
+bool isPalindrome(struct ListNode* head) {
+     struct ListNode*slow=head;
+     struct ListNode*fast=head;
+     while(fast!=NULL&&fast->next!=NULL)
+     {
+        slow=slow->next;
+        fast=fast->next->next;
+     }
+     struct ListNode*next;
+     struct ListNode*prev=NULL;
+     struct ListNode*current;
+     current=slow;
+     while(current!=NULL)
+     {
+        next=current->next;
+        current->next=prev;
+        prev=current;
+        current=next;
+     }
+  struct ListNode*temp=head;
+
+    while(temp!=NULL&prev!=NULL)
+    {
+        if(temp->val!=prev->val)
+        {
+            return false;
+        }
+        temp=temp->next;
+        prev=prev->next;
+    }
+    return true;
+    
+}
